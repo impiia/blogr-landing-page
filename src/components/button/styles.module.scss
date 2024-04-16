@@ -1,0 +1,33 @@
+.root {
+    border: none;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.5);
+        color: white;
+    }
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.white {
+    background-color: white;
+    border: 1px solid white;
+    color: rgb(255, 68, 87);
+}
+
+.transparent {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+}

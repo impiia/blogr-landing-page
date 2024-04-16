@@ -1,0 +1,15 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.title {
+    margin-bottom: 20px;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+.text {
+    font-size: 18px;
+    font-weight: 400;
+}

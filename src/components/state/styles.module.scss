@@ -1,0 +1,36 @@
+.root {
+    height: 410px;
+    width: 100%;
+    border-radius: 0px 100px 0px 100px;
+    background-color: #353750;
+    background-repeat: no-repeat;
+    font-family: "Inter", sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin-bottom: 320px;
+}
+
+.wrapper {
+    display: flex;
+    max-width: 1120px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+.text_card {
+    color: white;
+}
+
+.image {
+    position: relative;
+    top: 10px;
+}

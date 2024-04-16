@@ -1,0 +1,51 @@
+.root {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.transparent {
+  background-color: transparent; 
+  transition: background-color 0.3s ease; 
+}
+
+.opaque {
+  background-color: #24242C;
+  transition: background-color 0.3s ease; 
+}
+
+.scrolled {
+  background-color: #24242C; 
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1120px;
+  margin: 0 auto;
+  align-items: center;
+  height: 150px;
+}
+
+.menu_links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu_link {
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  margin-right: 50px;
+  
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.login_button {
+  margin-right: 50px;
+}

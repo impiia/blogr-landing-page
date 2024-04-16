@@ -1,0 +1,39 @@
+.root {
+    height: 612px;
+    border-radius: 0px 0px 0px 100px;
+    background: linear-gradient(270.00deg, rgb(255, 69, 88), rgb(254, 134, 110) 100%);
+    font-family: "Inter", sans-serif;
+    margin-bottom: 80px;
+    overflow: hidden;
+}
+
+.bg_image{
+    height: 100%;
+    width: 100%;
+    background-size: auto;
+    background-position: 120px -850px;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 46px;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.slogan {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 60px;
+}
+
+.start_button {
+    margin-right: 25px;
+}

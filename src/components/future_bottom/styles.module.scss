@@ -1,0 +1,43 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 1120px;
+    margin: 0 auto;
+    align-items: center;
+    color: #4A5F73;
+    font-family: "Inter", sans-serif;
+    margin-bottom: 320px;
+
+}
+
+.text_bloks {
+   
+    grid-column: 2; 
+    display: flex;
+    flex-direction: column;
+    height: 430px;
+    justify-content: space-evenly;
+}
+
+.image_container {
+    overflow: hidden;
+    position: absolute;
+    height: auto;
+    right: 50%;
+    top: -150px;
+    z-index: -1;
+}
+
+
+.title {
+    font-size: 46px;
+    font-weight: 600;
+}
+
+.columns {
+    position: relative;
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

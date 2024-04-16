@@ -1,0 +1,22 @@
+.root {
+    width: 100%;
+    border-radius: 0px 100px 0px 0px;
+    background-color: #24242C;
+    font-family: "Inter", sans-serif;
+    padding: 100px 0px;
+    color: white;
+}
+
+.wrapper {
+    display: flex;
+    max-width: 1120px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    width: 100%;
+}
+
