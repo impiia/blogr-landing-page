@@ -3,51 +3,59 @@ import ArrowIcon from '../../assets/icon-arrow-light.svg';
 import styles from './styles.module.scss';
 import { createPortal } from 'react-dom';
 import { Dropdown } from '../dropdown/component';
+import classNames from 'classnames';
 
-export const MenuItem = ({ title }) => {
+export const MenuItem = ({ title, subItems }) => {
   const [coordinates, setCoordinates] = useState(null);
-  const buttonRef = useRef();
+  const menuItemRef = useRef();
+  const popoverContainer = useRef(null);
 
   const toggleCartModal = () => {
     if (coordinates) {
       setCoordinates(null);
       return;
     }
-
-    const { bottom, left } = buttonRef.current.getBoundingClientRect();
-
+    const { bottom, left } = menuItemRef.current.getBoundingClientRect();
     setCoordinates({ left: left, top: bottom });
   };
 
-  const popoverContainer = useRef(null);
+  useEffect(() => {
+    const handleResize = () => {
+      if (coordinates) {
+        const { bottom, left } = menuItemRef.current.getBoundingClientRect();
+        setCoordinates({ left: left, top: bottom });
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    const handleClickOutside = (event) => {
+      if (coordinates && !menuItemRef.current.contains(event.target) && !popoverContainer.current.contains(event.target)) {
+        setCoordinates(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [coordinates]);
 
-    useEffect(() => {
-        const handleResize = () => {
-            if (coordinates) {
-                const { bottom, left } = buttonRef.current.getBoundingClientRect();
-                setCoordinates({ left: left, top: bottom });
-            }
-        };
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, [coordinates]); 
-
-    useEffect(() => {
-        popoverContainer.current = document.getElementById("popover-container");
-    }, []);
+  useEffect(() => {
+    popoverContainer.current = document.getElementById("popover-container");
+  }, []);
 
   return (
-    <div className={styles.root}>
-      <div ref={buttonRef} onClick={toggleCartModal}>
-        <span>{title}</span>
-        <img src={ArrowIcon} alt="arrow" className={styles.icon} />
-      </div>
+    <div ref={menuItemRef} className={styles.root} onClick={toggleCartModal}>
+        {title}
+        <img
+          src={ArrowIcon}
+          alt="arrow"
+          className={classNames(styles.icon, { [styles.up]: coordinates })}
+        />
+
       {coordinates &&
         createPortal(
           <div style={coordinates} className={styles.popoverContainer}>
-            <Dropdown />
+            <Dropdown items={subItems} />
           </div>,
           popoverContainer.current
         )}
@@ -55,23 +63,4 @@ export const MenuItem = ({ title }) => {
   );
 };
 
-
-
-//   return (
-//     <div className={styles.root}>
-//       <div ref={ref} onClick={toggleDropdown}>
-//         <span>{title}</span>
-//         <img src={ArrowIcon} alt="arrow" className={styles.icon} />
-//       </div>
-//       {coordinates &&
-//         createPortal(
-//           <div className={styles.popoverContainer}>
-//             {/* <Dropdown /> */}
-//             <p>popover</p>
-//           </div>,
-//           popoverContainer.current
-//         )}
-//     </div>
-//   );
-// };
 

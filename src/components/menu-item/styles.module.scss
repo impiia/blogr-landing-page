@@ -1,26 +1,28 @@
 .root {
+    padding: 8px 0;
     position: relative;
     color: white;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-weight: 400;
     text-decoration: none;
-
-    &:hover {
-        cursor: pointer;
-    }
 }
 
 .icon {
     margin-left: 5px;
+    transition: transform 0.3s ease;
+  
+    &.up {
+    transform: rotate(180deg); 
+  }
 }
-
+  
 .popoverContainer {
     position: absolute;
     background-color: white;
     color: black;
+    font-family: "Inter", sans-serif;
     border-radius: 5px;
-    border: 1px solid black;
     z-index: 101;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     min-width: 100px;

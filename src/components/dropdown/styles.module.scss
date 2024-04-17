@@ -1,11 +1,16 @@
  ul {
-    list-style-type: none; // убираем маркеры списка
-    padding: 0; // убираем отступы внутри списка
-    margin: 0; // убираем отступы вокруг списка
+    list-style-type: none; 
+    padding: 0; 
+    margin: 0; 
   }
   
   li {
-    padding: 8px 0; // добавим отступы сверху и снизу для элементов списка
+    padding: 8px 0; 
+
+    &:hover {
+        cursor: pointer;
+        font-weight: 800;
+    }
   }
   
   

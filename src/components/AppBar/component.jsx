@@ -39,15 +39,15 @@ export const AppBar = () => {
                         </a>
                     </li>
                     <li className={styles.menu_link}>
-                        <MenuItem title="Product" />
+                        <MenuItem title="Product" subItems={["Overview", "Pricing", "Marketplace", "Features", "Integrations"]} />
                     </li>
 
                     <li className={styles.menu_link}>
-                        <MenuItem title="Company" />
+                        <MenuItem title="Company" subItems={["About", "Team", "Blog", "Carier"]}/>
                     </li>
 
                     <li className={styles.menu_link}>
-                        <MenuItem title="Connect" />
+                        <MenuItem title="Connect" subItems={["Contact", "Newsletter", "Linkedin"]} />
                     </li>
 
                 </ul>

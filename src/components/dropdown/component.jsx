@@ -1,13 +1,11 @@
 import  './styles.module.scss';
 
-export const Dropdown = () => {
+export const Dropdown = ({items}) => {
     return (
         <ul>
-          <li>Overview</li>
-          <li>Pricing</li>
-          <li>Marketplace</li>
-          <li>Features</li>
-          <li>Integrations</li>
-        </ul>
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     );
   };
