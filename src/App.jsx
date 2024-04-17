@@ -10,12 +10,13 @@ function App() {
 
   return (
     <>
-      <AppBar/>
+      <AppBar />
       <Intro />
       <Future />
       <State />
       <FutureBottom />
       <Footer />
+      <div id="popover-container"/>
     </>
   )
 }

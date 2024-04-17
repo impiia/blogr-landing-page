@@ -3,13 +3,14 @@ import Logo from '../../assets/logo.svg';
 import { Button } from '../button/component';
 import styles from './styles.module.scss';
 import classnames from 'classnames';
+import { MenuItem } from '../menu-item/component';
 
 export const AppBar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
 
     const handleScroll = () => {
         const offset = window.pageYOffset;
-        if (offset > 50) { 
+        if (offset > 50) {
             setIsScrolled(true);
         } else {
             setIsScrolled(false);
@@ -18,7 +19,7 @@ export const AppBar = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-        
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
@@ -38,21 +39,15 @@ export const AppBar = () => {
                         </a>
                     </li>
                     <li className={styles.menu_link}>
-                        <a >
-                            Product
-                        </a>
+                        <MenuItem title="Product" />
                     </li>
 
                     <li className={styles.menu_link}>
-                        <a  >
-                            Company
-                        </a>
+                        <MenuItem title="Company" />
                     </li>
 
                     <li className={styles.menu_link}>
-                        <a  >
-                            Connect
-                        </a>
+                        <MenuItem title="Connect" />
                     </li>
 
                 </ul>
