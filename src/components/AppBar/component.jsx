@@ -7,7 +7,6 @@ import { MenuItem } from '../menu-item/component';
 
 export const AppBar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
-
     const handleScroll = () => {
         const offset = window.pageYOffset;
         if (offset > 50) {
@@ -19,7 +18,6 @@ export const AppBar = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };

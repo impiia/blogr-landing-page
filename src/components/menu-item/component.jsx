@@ -32,10 +32,15 @@ export const MenuItem = ({ title, subItems }) => {
         setCoordinates(null);
       }
     };
+    const handleScroll = () => {
+      setCoordinates(null);
+    };
     document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('scroll', handleScroll); 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [coordinates]);
 
