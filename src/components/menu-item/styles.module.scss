@@ -6,17 +6,21 @@
     font-size: 15px;
     font-weight: 400;
     text-decoration: none;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .icon {
     margin-left: 5px;
     transition: transform 0.3s ease;
-  
+
     &.up {
-    transform: rotate(180deg); 
-  }
+        transform: rotate(180deg);
+    }
 }
-  
+
 .popoverContainer {
     position: absolute;
     background-color: white;

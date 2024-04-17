@@ -1,11 +1,11 @@
-import  './styles.module.scss';
+import styles from "./styles.module.scss";
 
-export const Dropdown = ({items}) => {
-    return (
-        <ul>
-        {items.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
-    );
-  };
+export const Dropdown = ({ items }) => {
+  return (
+    <ul className={styles.root}>
+      {items.map((item, index) => (
+        <li className={styles.item} key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+};
