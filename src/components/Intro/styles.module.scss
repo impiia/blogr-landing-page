@@ -1,8 +1,7 @@
 .root {
-    height: 612px;
+    height: 600px;
     border-radius: 0px 0px 0px 100px;
     background: linear-gradient(270.00deg, rgb(255, 69, 88), rgb(254, 134, 110) 100%);
-    font-family: "Inter", sans-serif;
     margin-bottom: 80px;
     overflow: hidden;
 }
@@ -11,7 +10,7 @@
     height: 100%;
     width: 100%;
     background-size: auto;
-    background-position: 120px -850px;
+    background-position: 155px -855px;
     background-repeat: no-repeat;
 
     display: flex;
@@ -19,21 +18,22 @@
     color: white;
     align-items: center;
     justify-content: center;
+    padding-top: 20px;
 }
 
 .title {
-    font-size: 46px;
+    font-size: 58px;
     font-weight: 600;
-    margin-bottom: 40px;
+    margin-bottom: 16px;
 }
 
 .slogan {
     color: rgb(255, 255, 255);
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 400;
-    margin-bottom: 60px;
+    margin-bottom: 45px;
 }
 
 .start_button {
-    margin-right: 25px;
+    margin-right: 30px;
 }

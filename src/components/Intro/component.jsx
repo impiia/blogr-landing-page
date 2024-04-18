@@ -9,8 +9,8 @@ export const Intro = () => {
                 <h1 className={styles.title}>A modern publishing platform</h1>
                 <span className={styles.slogan}>Grow you audience and build your brand</span>
                 <div>
-                    <Button title='Start for free' color='transparent' className={styles.start_button}/>
-                    <Button title='Learn more' color='white'/>
+                    <Button title='Start for free'  color='white' className={styles.start_button}/>
+                    <Button title='Learn more' color='transparent'/>
                 </div>
             </div>
         </div>

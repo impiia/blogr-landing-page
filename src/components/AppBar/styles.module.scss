@@ -22,10 +22,10 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
-  max-width: 1120px;
+  max-width: 1110px;
   margin: 0 auto;
   align-items: center;
-  height: 150px;
+  height: 165px;
 }
 
 .menu_links {
@@ -35,12 +35,20 @@
 }
 
 .menu_link {
-  margin-right: 50px;
+  margin-right: 30px;
   &:last-child {
     margin-right: 0;
   }
 }
 
 .login_button {
-  margin-right: 50px;
+  margin-right: 30px;
+}
+
+.logo {
+  margin-right: 68px;
+}
+
+.left_menu {
+  display: flex;
 }

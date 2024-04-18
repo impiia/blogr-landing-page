@@ -30,25 +30,25 @@ export const AppBar = () => {
     return (
         <div className={appBarClasses}>
             <div className={styles.wrapper}>
-                <ul className={styles.menu_links}>
-                    <li className={styles.menu_link}>
-                        <a>
-                            <img className={styles.logo} src={Logo} alt="logo" />
-                        </a>
-                    </li>
-                    <li className={styles.menu_link}>
-                        <MenuItem title="Product" subItems={["Overview", "Pricing", "Marketplace", "Features", "Integrations"]} />
-                    </li>
+                <div className={styles.left_menu}>
+                    <a className={styles.logo}>
+                        <img src={Logo} alt="logo" />
+                    </a>
+                    <ul className={styles.menu_links}>
+                        <li className={styles.menu_link}>
+                            <MenuItem title="Product" subItems={["Overview", "Pricing", "Marketplace", "Features", "Integrations"]} />
+                        </li>
 
-                    <li className={styles.menu_link}>
-                        <MenuItem title="Company" subItems={["About", "Team", "Blog", "Carier"]}/>
-                    </li>
+                        <li className={styles.menu_link}>
+                            <MenuItem title="Company" subItems={["About", "Team", "Blog", "Carier"]} />
+                        </li>
 
-                    <li className={styles.menu_link}>
-                        <MenuItem title="Connect" subItems={["Contact", "Newsletter", "Linkedin"]} />
-                    </li>
+                        <li className={styles.menu_link}>
+                            <MenuItem title="Connect" subItems={["Contact", "Newsletter", "Linkedin"]} />
+                        </li>
 
-                </ul>
+                    </ul>
+                </div>
 
                 <div>
                     <Button title='Login' color='transparent' className={styles.login_button} />
