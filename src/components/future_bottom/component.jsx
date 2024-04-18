@@ -7,7 +7,7 @@ export const FutureBottom = () => {
         <section className={styles.root}>
             <div className={styles.columns}>
                 <div className={styles.image_container}>
-                    <img src={bgImage} ></img>
+                    <img src={bgImage} alt="Background Image" />
                 </div>
                 <div className={styles.text_bloks}>
                     <TextCard

@@ -18,7 +18,7 @@ export const Future = () => {
                     />
                 </div>
                 <div className={styles.image_container}>
-                    <img src={bgImage} ></img>
+                <img src={bgImage} alt="Background Image" />
                 </div>
             </div>
         </section>
