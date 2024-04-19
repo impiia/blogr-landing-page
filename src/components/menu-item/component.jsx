@@ -15,79 +15,73 @@ export const MenuItem = ({ title, subItems }) => {
   const popoverContainer = useRef(null);
 
   const toggleMenu = useCallback(() => {
-    setIsOpen(prev => !prev);
-  }, []);
-
-  const toggleModal = useCallback(() => {
-    if (coordinates) {
-      setCoordinates(null);
-      return;
-    }
-    const { bottom, left } = menuItemRef.current.getBoundingClientRect();
-    setCoordinates({ left, top: bottom });
-  }, [coordinates]);
+    setIsOpen((prevIsOpen) => {
+      if (!isMobile && !prevIsOpen) {
+        const { bottom, left } = menuItemRef.current.getBoundingClientRect();
+        setCoordinates({ left, top: bottom });
+      } else {
+        setCoordinates(null);
+      }
+      return !prevIsOpen;
+    });
+  }, [isMobile]);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= MOBILE_WIDTH);
-      if (coordinates) {
-        const { bottom, left } = menuItemRef.current.getBoundingClientRect();
-        setCoordinates({ left, top: bottom });
+      const currentlyIsMobile = window.innerWidth <= MOBILE_WIDTH;
+      if (isMobile !== currentlyIsMobile) {
+        setIsMobile(currentlyIsMobile);
+        if (!currentlyIsMobile) setIsOpen(false);
       }
     };
 
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobile]);
+
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (popoverContainer.current && !menuItemRef.current.contains(event.target) &&
           !popoverContainer.current.contains(event.target)) {
-        setCoordinates(null);
+        setIsOpen(false);
       }
     };
 
-    const handleScroll = () => {
-      setCoordinates(null);
-    };
-
-    window.addEventListener("resize", handleResize);
     document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('scroll', handleScroll);
-
     return () => {
-      window.removeEventListener("resize", handleResize);
       document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('scroll', handleScroll);
     };
-  }, [coordinates]);
+  }, []);
 
   useEffect(() => {
     popoverContainer.current = document.getElementById("popover-container");
   }, []);
 
-  const handleClick = () => {
-    if (isMobile) {
-      toggleMenu();
-    } else {
-      toggleModal();
-    }
-  };
-
   return (
-    <div ref={menuItemRef} className={styles.root} onClick={handleClick}>
+    <div ref={menuItemRef} className={styles.root} onClick={toggleMenu}>
       {title}
       <img
         src={ArrowIcon}
         alt="arrow"
-        className={classNames(styles.icon, { [styles.up]: coordinates || isOpen })}
+        className={classNames(styles.icon, { [styles.up]: isOpen })}
       />
-      {isMobile ? (isOpen && (
-        <div className={styles.dropdown_menu}>
-          <Dropdown items={subItems} />
-        </div>
-      )) : (coordinates && createPortal(
-        <div style={coordinates} ref={popoverContainer} className={styles.popoverContainer}>
-          <Dropdown items={subItems} />
-        </div>,
-        document.body
-      ))}
+      {isMobile ? (
+        isOpen && (
+          <div className={styles.dropdown_menu}>
+            <Dropdown items={subItems} />
+          </div>
+        )
+      ) : (
+        isOpen &&
+        createPortal(
+          <div style={coordinates} ref={popoverContainer} className={styles.popoverContainer}>
+            <Dropdown items={subItems} />
+          </div>,
+          document.body
+        )
+      )}
     </div>
   );
 };
