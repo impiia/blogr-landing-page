@@ -1,51 +1,34 @@
-import { useRef, useState, useCallback } from 'react';
-import ArrowIcon from '../../assets/icon-arrow-light.svg';
-import styles from './styles.module.scss';
-import { createPortal } from 'react-dom';
-import { Dropdown } from '../dropdown/component';
-import classNames from 'classnames';
-import { useMediaQuery } from './use-media-query';
-import { useOnClickOutside } from './use-on-click-outside';
-import { usePopoverPosition } from './use-popover-position';
+import { useState, useEffect, useCallback } from 'react';
 
-const MOBILE_WIDTH = 770;
+export const usePopoverPosition = (ref, isOpen, isMobile) => {
+    const [coordinates, setCoordinates] = useState(null);
 
-export const MenuItem = ({ title, subItems }) => {
-  const menuItemRef = useRef();
-  const isMobile = useMediaQuery(`(max-width: ${MOBILE_WIDTH}px)`);
-  const [isOpen, setIsOpen] = useState(false);
-  const popoverContainer = document.getElementById("popover-container");
+    const calculateCoordinates = useCallback(() => {
+        if (ref.current && !isMobile) {
+            const { bottom, left } = ref.current.getBoundingClientRect();
+            return { left, top: bottom };
+        }
+        return null;
+    }, [ref, isMobile]);
 
-  const coordinates = usePopoverPosition(menuItemRef, isOpen, isMobile);
+    useEffect(() => {
+        if (isOpen && !isMobile) {
+            setCoordinates(calculateCoordinates());
+        }
+    }, [isOpen, calculateCoordinates, isMobile]);
 
-  useOnClickOutside(menuItemRef, () => setIsOpen(false), isMobile);
+    useEffect(() => {
+        const handleResize = () => {
+            if (isOpen && !isMobile) {
+                setCoordinates(calculateCoordinates());
+            }
+        };
 
-  const toggleMenu = useCallback(() => {
-    setIsOpen(prevIsOpen => !prevIsOpen);
-  }, []);
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [isOpen, calculateCoordinates, isMobile]);
 
-  return (
-    <div ref={menuItemRef} className={styles.root} onClick={toggleMenu} aria-expanded={isOpen}>
-      {title}
-      <img
-        src={ArrowIcon}
-        alt="arrow"
-        className={classNames(styles.icon, { [styles.up]: isOpen })}
-      />
-      {isMobile ? (
-        isOpen && (
-          <div className={styles.dropdown_menu}>
-            <Dropdown items={subItems} />
-          </div>
-        )
-      ) : (
-        isOpen && popoverContainer && createPortal(
-          <div style={coordinates} className={styles.popoverContainer}>
-            <Dropdown items={subItems} />
-          </div>,
-          popoverContainer
-        )
-      )}
-    </div>
-  );
+    return coordinates;
 };
