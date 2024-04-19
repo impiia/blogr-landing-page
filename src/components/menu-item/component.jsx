@@ -1,66 +1,37 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import ArrowIcon from '../../assets/icon-arrow-light.svg';
 import styles from './styles.module.scss';
 import { createPortal } from 'react-dom';
 import { Dropdown } from '../dropdown/component';
 import classNames from 'classnames';
+import { useMediaQuery } from './use-media-query';
+import { useOnClickOutside } from './use-on-click-outside';
+
 
 const MOBILE_WIDTH = 770;
 
 export const MenuItem = ({ title, subItems }) => {
-  const [coordinates, setCoordinates] = useState(null);
   const menuItemRef = useRef();
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= MOBILE_WIDTH);
+  const isMobile = useMediaQuery(`(max-width: ${MOBILE_WIDTH}px)`);
   const [isOpen, setIsOpen] = useState(false);
-  const popoverContainer = useRef(null);
+  const popoverContainer = document.getElementById("popover-container");
 
-  const toggleMenu = useCallback(() => {
-    setIsOpen((prevIsOpen) => {
-      if (!isMobile && !prevIsOpen) {
-        const { bottom, left } = menuItemRef.current.getBoundingClientRect();
-        setCoordinates({ left, top: bottom });
-      } else {
-        setCoordinates(null);
-      }
-      return !prevIsOpen;
-    });
-  }, [isMobile]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const currentlyIsMobile = window.innerWidth <= MOBILE_WIDTH;
-      if (isMobile !== currentlyIsMobile) {
-        setIsMobile(currentlyIsMobile);
-        if (!currentlyIsMobile) setIsOpen(false);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [isMobile]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (popoverContainer.current && !menuItemRef.current.contains(event.target) &&
-          !popoverContainer.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+  const calculateCoordinates = useCallback(() => {
+    if (menuItemRef.current) {
+      const { bottom, left } = menuItemRef.current.getBoundingClientRect();
+      return { left, top: bottom };
+    }
+    return null;
   }, []);
 
-  useEffect(() => {
-    popoverContainer.current = document.getElementById("popover-container");
+  useOnClickOutside(menuItemRef, () => setIsOpen(false), isMobile);
+
+  const toggleMenu = useCallback(() => {
+    setIsOpen(prevIsOpen => !prevIsOpen);
   }, []);
 
   return (
-    <div ref={menuItemRef} className={styles.root} onClick={toggleMenu}>
+    <div ref={menuItemRef} className={styles.root} onClick={toggleMenu} aria-expanded={isOpen}>
       {title}
       <img
         src={ArrowIcon}
@@ -74,12 +45,11 @@ export const MenuItem = ({ title, subItems }) => {
           </div>
         )
       ) : (
-        isOpen &&
-        createPortal(
-          <div style={coordinates} ref={popoverContainer} className={styles.popoverContainer}>
+        isOpen && popoverContainer && createPortal(
+          <div style={calculateCoordinates()} className={styles.popoverContainer}>
             <Dropdown items={subItems} />
           </div>,
-          document.body
+          popoverContainer
         )
       )}
     </div>
