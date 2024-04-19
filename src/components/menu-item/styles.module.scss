@@ -36,13 +36,6 @@
         color: black;
     }
 
-    .icon {
-        filter: invert(1) hue-rotate(0deg);
-    }
-
-    .icon {
-        filter: invert(0.5) sepia(1) hue-rotate(-50deg);
-    }
     .dropdown_menu {
         margin-top: 10px;
         display: flex;
@@ -52,4 +45,11 @@
         border-radius: 5px;
         padding: 10px;
     }
+
+    .icon {
+        filter: invert(0.5) sepia(1) hue-rotate(-50deg);
+    }
+    
+      
+
 }
