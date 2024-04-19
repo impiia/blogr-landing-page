@@ -6,17 +6,17 @@
 }
 
 .transparent {
-  background-color: transparent; 
-  transition: background-color 0.3s ease; 
+  background-color: transparent;
+  transition: background-color 0.3s ease;
 }
 
 .opaque {
   background-color: #24242C;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
 }
 
 .scrolled {
-  background-color: #24242C; 
+  background-color: #24242C;
 }
 
 .wrapper {
@@ -28,14 +28,21 @@
   height: 165px;
 }
 
-.menu_links {
+.menu {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+}
+
+.menu_links {
+  display: flex;
+  justify-content: space-between;
 }
 
 .menu_link {
   margin-right: 30px;
+
   &:last-child {
     margin-right: 0;
   }
@@ -49,6 +56,94 @@
   margin-right: 68px;
 }
 
-.left_menu {
+hr { 
+  display: none;
+}
+
+.buttons {
   display: flex;
+}
+
+.hamburger_btn {
+  display: none;
+}
+
+@media screen and (max-width: 770px) {
+ 
+  .hamburger_btn {
+    display: block;
+    position: absolute;
+    right: 24px;
+    top: 40px;
+    cursor: pointer;
+    z-index: 11;
+  }
+
+  .open {
+    display: block;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .menu {
+    display: none;
+    position: fixed;
+    flex-direction: column;
+    top: 110px;
+    right: 0px;
+    left: 0px;
+    margin: 0 20px;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    z-index: 10;
+    transition: right 0.3s;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .menu_open {
+    display: flex;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .menu_links {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .menu_link {
+    margin-right: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+  }
+  .login_button {
+    margin-right: 0;
+    margin-bottom: 20px;
+    color: black;
+  }
+  
+  hr {
+    display: block;
+    border: none;
+    width: 100%;
+    border-top: 1px solid grey; 
+    margin-bottom: 30px; 
+}
+
+
+  // .login_button,
+  // .sign_up_button {
+  //   display: none;
+  // }
+
+  // .logo {
+  //   display: none;
+  // }
+
 }
