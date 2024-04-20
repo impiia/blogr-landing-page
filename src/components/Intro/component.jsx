@@ -1,6 +1,6 @@
 import { Button } from '../button/component';
 import styles from './styles.module.scss';
-import bgImage from '../../../public/assets/path.svg';
+import bgImage from '/public/assets/path.svg';
 
 export const Intro = () => {
     return (
